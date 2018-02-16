@@ -55,7 +55,7 @@ When using one on these web servers the use of a ``memcached`` server is necessa
 
 Then you will have to change in sunstone configuration (``/etc/one/sunstone-server.conf``) the value of ``:sessions`` to ``memcache``.
 
-If you want to use novnc you need to have it running. You can start this service with the command:
+If you want to use novnc you need to create the folder ``/var/log/one`` (for novnc log files) and have it running. You can start this service with the command:
 
 .. code::
 
@@ -119,13 +119,15 @@ We will provide the instructions for Apache web server but the steps will be sim
 
 First thing you have to do is install Phusion Passenger. For this you can use pre-made packages for your distribution or follow the `installation instructions <https://www.phusionpassenger.com/download/#open_source>`__ from their web page. The installation is self explanatory and will guide you in all the process, follow them an you will be ready to run Sunstone.
 
-Next thing we have to do is configure the virtual host that will run our Sunstone server. We have to point to the ``public`` directory from the Sunstone installation, here is an example:
+Next thing we have to do is configure the virtual host that will run our Sunstone server. We have to point to the ``public`` directory from the Sunstone installation, here is an example of /etc/apache2/sites-available/opennebula.conf:
+
+
 
 .. code::
 
     <VirtualHost *:80>
       ServerName sunstone-server
-      PassengerUser oneadmin
+      PassengerUser <username>
       # !!! Be sure to point DocumentRoot to 'public'!
       DocumentRoot /usr/lib/one/sunstone/public
       <Directory /usr/lib/one/sunstone/public>
@@ -138,7 +140,10 @@ Next thing we have to do is configure the virtual host that will run our Sunston
       </Directory>
     </VirtualHost>
 
-.. note:: When you're experiencing login problems you might want to set ``PassengerMaxInstancesPerApp 1`` in your passenger configuration or try memcached since Sunstone does not support sessions across multiple server instances.
+.. note::
+    When you're experiencing login problems you might want to set ``PassengerMaxInstancesPerApp 1`` in your passenger configuration or try memcached since Sunstone does not support sessions across multiple server instances.
+
+    The <username> of the virtualhost must be the user who installed sunstone and the owner of /var/lib/one/.one/sunstone_auth
 
 Now the configuration should be ready, restart -or reload apache configuration- to start the application and point to the virtual host to check if everything is running.
 
