@@ -8,4 +8,4 @@ Docker Machine
    :maxdepth: 2
 
    Overview <overview>
-   Docker machine configuration <docker_machine_configuration>
+   Docker and OpenNebula integration <docker_integration>

@@ -1,22 +1,29 @@
-=============================
-Docker machine Configuration
-=============================
+===========================================
+Docker and OpenNebula integration
+===========================================
+
+For docker integration we need to install docker machine and docker at OpenNebula frontend:
+
+.. prompt:: bash # auto
+
+    # curl -L https://github.com/docker/machine/releases/download/v0.14.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine && sudo install /tmp/docker-machine /usr/local/bin/docker-machine
+    # sudo apt-get install docker-ce
 
 Official documentation for Docker Machine is available `here <https://docs.docker.com/machine/>`__.
 
 Usage
 ================================================================================
 
-Set up a user to use for docker-machine with OpenNebula, give it permissions to create / manage instances.
+Once we have all the requirements we need to provide docker a user to use for docker-machine with OpenNebula, the user will need permissions to create / manage instances.
 Set up env variables ``ONE_AUTH`` to contain ``user:password`` and ``ONE_XMLRPC`` to point to the OpenNebula cloud.
 
 .. prompt:: bash # auto
 
-    #export ONE_AUTH=~/.one/one_auth
+    #export ONE_AUTH=/var/lib/one/one_auth
     #export ONE_XMLRPC=https://<ONE FRONTEND>:2633/RPC2
 
 
-Once you have fulfilled these pre-requisites you can now launch your docker-engine. 
+Once you have fulfilled these pre-requisites you can now launch your docker-engine over OpenNebula. 
 
 We can create a host using an OpenNebula registered template:
 
