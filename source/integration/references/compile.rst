@@ -43,6 +43,8 @@ Follow these simple steps to install the OpenNebula software:
 +---------------+--------------------------------------------------------+
 | systemd       | **yes** if you want to build systemd support           |
 +---------------+--------------------------------------------------------+
+| dockerMachine | **yes** if you want to build the docker-machine driver |
++---------------+--------------------------------------------------------+
 
 If the following error appears, then you need to remove the option 'new\_xmlrpc=yes' or install xmlrpc-c version >= 1.31:
 
